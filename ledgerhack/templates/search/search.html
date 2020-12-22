@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load static evade_tags %}
+
+
+{% block title %}Search{% if results %} for &#8220;{{ query }}&#8221;{% endif %} &#183; {{ block.super }}{% endblock %}
+
+
+{% block main %}
+
+<h1>Search{% if results %} for &#8220;{{ query }}&#8221;{% endif %}</h1>
+
+<form method="get" action="{% url 'search' %}">
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+{% endblock %}

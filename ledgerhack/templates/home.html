@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load static evade_tags %}
+
+
+{% block main %}
+
+<h1>{{ request.site.name }} searches the information leaked in the Ledger data breach.</h1>
+
+<form method="get" action="{% url 'search' %}">
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+{% endblock %}
