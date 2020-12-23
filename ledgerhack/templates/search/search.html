@@ -3,12 +3,12 @@
 {% load static evade_tags %}
 
 
-{% block title %}Search{% if results %} for &#8220;{{ query }}&#8221;{% endif %} &#183; {{ block.super }}{% endblock %}
+{% block title %}Search{% if query %} for {{ query }}{% endif %} &#183; {{ block.super }}{% endblock %}
 
 
 {% block main %}
 
-<h1>Search{% if results %} for &#8220;{{ query }}&#8221;{% endif %}</h1>
+<h1>{% if query %}<code>{{ query }}</code> was not found{% else %}Search{% endif %}</h1>
 
 <form method="get" action="{% url 'search' %}">
     {{ form.as_p }}

@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /search?*
-
-User-agent: Googlebot-Image
+Allow: /about/
+Allow: /search/
 Disallow: /

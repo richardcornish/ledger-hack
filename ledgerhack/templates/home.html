@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 
-{% load static evade_tags %}
+{% load humanize static evade_tags %}
 
 
 {% block main %}
 
-<h1>{{ request.site.name }} searches the information leaked in the Ledger data breach.</h1>
+<h1><strong>{{ request.site.name }}</strong> searches the information leaked in the <a href="https://twitter.com/Ledger/status/1340769565639233536">Ledger data breach</a>.</h1>
+
+<ul>
+    <li><strong>{{ victim_list_count|intcomma }}</strong> victims whose data <em>in total</em> were breached</li>
+    <li><strong>{{ customer_list_count|intcomma }}</strong> victims whose <em>customer data</em> were breached</li>
+    <li><strong>{{ subscriber_list_count|intcomma }}</strong> victims whose <em>newsletter data</em> were breached</li>
+</ul>
 
 <form method="get" action="{% url 'search' %}">
     {{ form.as_p }}

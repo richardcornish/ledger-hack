@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.humanize',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.postgres',
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'evade',
+    'victims',
 ]
 
 MIDDLEWARE = [
@@ -144,6 +146,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 # https://docs.djangoproject.com/en/3.1/ref/contrib/sites/
 
 SITE_ID = int(os.environ.get('SITE_ID', '1'))
+
+
+# Django Hashid Field
+# https://pypi.org/project/django-hashid-field/
+
+HASHID_FIELD_SALT = os.environ.get('HASHID_FIELD_SALT', 'fake-key')
 
 
 # Heroku

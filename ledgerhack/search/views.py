@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.generic.edit import FormView
@@ -30,8 +31,11 @@ class SearchView(FormView):
 
     def form_valid(self, form):
         query = form.cleaned_data['q']
+        obj = form.get_result(query)
         kwargs = {
             'query': query,
-            'results': form.get_results(query),
         }
-        return self.render_to_response(self.get_context_data(**kwargs))
+        if obj is not None:
+            return redirect(obj.get_absolute_url())
+        else:
+            return self.render_to_response(self.get_context_data(**kwargs))

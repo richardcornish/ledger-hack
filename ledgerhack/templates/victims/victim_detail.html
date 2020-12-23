@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load evade_tags %}
+
+
+{% block main %}
+
+<h1><code>{{ victim.email|safe|evade }}</code> was found</h1>
+
+<h2>Customer data</h2>
+
+{% if victim.name %}
+
+<p>Your customer data <strong>was breached</strong>.</p>
+
+<dl>
+    <dt>Name</dt>
+    <dd><code>{{ victim.name|safe|evade }}</code></dd>
+    <dt>E-mail address</dt>
+    <dd><code>{{ victim.email|safe|evade }}</code></dd>
+    <dt>Address</dt>
+    <dd>
+        <address>
+            <code>{{ victim.address_1|safe|evade }}</code><br>
+            <code>{{ victim.address_2|safe|evade }}</code><br>
+            <code>{{ victim.country|safe|evade }}</code><br>
+        </address>
+    </dd>
+    <dt>Phone</dt>
+    <dd><code>{{ victim.phone|safe|evade }}</code></dd>
+</dl>
+
+{% else %}
+
+<p>Your customer data was <strong>not breached</strong>.</p>
+
+{% endif %}
+
+<h2>Subscription data</h2>
+
+{% if victim.newsletter %}
+
+<p>Your newsletter subscription data <strong>was breached</strong>.</p>
+
+<dl>
+    <dt>E-mail address</dt>
+    <dd><code>{{ victim.email|safe|evade }}</code></dd>
+</dl>
+
+{% else %}
+
+<p>Your newsletter subscription data was <strong>not breached</strong>.</p>
+
+{% endif %}
+
+{% if victim.name or victim.newsletter %}
+
+<h2>What you should do</h2>
+
+<ul>
+    {% if victim.email or victim.phone %}
+    <li>Ignore all phishing attempts</li>
+    {% endif %}
+    {% if victim.email %}
+    <li>Consider changing your e-mail address</li>
+    {% endif %}
+    {% if victim.phone %}
+    <li>Consider changing your phone number and SIM card</li>
+    {% endif %}
+    {% if victim.address_1 or victim.address_2 %}
+    <li>Consider buying a P.O. Box for future sensitive purchases</li>
+    {% endif %}
+</ul>
+
+{% endif %}
+
+<form method="get" action="{% url 'search' %}">
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+{% endblock %}
